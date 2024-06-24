@@ -7,19 +7,20 @@ async function lintMdFiles(path: string) {
   const keys = Object.keys(result)
   const values = Object.values(result)
 
-  if (hasAnyArrayWithValues(values)) {
-    for (let i = 0; i < keys.length; i++) {
-      const value = values[i]
-      if (value.length) {
-        console.log(
-          chalk.red(`Found ${value.length} errors in file!
+  if (!hasAnyArrayWithValues(values)) return true
+
+  for (let i = 0; i < keys.length; i++) {
+    const value = values[i]
+    if (value.length) {
+      console.log(
+        chalk.red(`Found ${value.length} errors in file!
             please check the file and fix any errors: ${generateVSCodeLink(path)}`),
-        )
-        console.log('Errors: ', JSON.stringify(value, null, 2))
-        return false
-      }
+      )
+      console.log('Errors: ', JSON.stringify(value, null, 2))
+      return false
     }
   }
+
   return true
 }
 

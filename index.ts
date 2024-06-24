@@ -7,13 +7,7 @@ import { installVsCodeExtension } from './scripts/helpers.js'
 import lintMdFiles from './scripts/lint.js'
 import mapContent from './scripts/mapContent.js'
 ;(async () => {
-  console.log(
-    chalk.blue(
-      figlet.textSync('-- Offshorly Docs --', {
-        horizontalLayout: 'controlled smushing',
-      }),
-    ),
-  )
+  //Install VSCode extensions
   await new Promise<void>((resolve) => {
     setTimeout(async () => {
       console.log(chalk.yellow('Installing VSCode Extensions...'))
@@ -25,14 +19,14 @@ import mapContent from './scripts/mapContent.js'
     }, 1500)
   })
 
+  //Map markdown files path
   const paths = getMdPaths('content', [])
-
   const pathMap: Record<string, boolean> = {}
-
   paths.forEach((path) => {
     pathMap[path] = false
   })
 
+  //Listen for changes in the "content" dir
   chokidar.watch('content').on('all', async (e, path) => {
     if (
       e === 'change' ||
@@ -62,4 +56,11 @@ import mapContent from './scripts/mapContent.js'
       }
     }
   })
+  console.log(
+    chalk.blue(
+      figlet.textSync('-- Offshorly Docs --', {
+        font: 'Bloody',
+      }),
+    ),
+  )
 })()
