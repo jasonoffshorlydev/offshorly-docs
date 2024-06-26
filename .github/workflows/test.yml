@@ -28,10 +28,10 @@ jobs:
         run: pnpm build
 
       - name: 'Check Files for Non Markdown'
-        run: 'node scripts/checkFileExtensions.js'
+        run: 'node dist/scripts/checkFileExtensions.js'
 
       - name: 'Check for Markdown lint errors'
-        run: 'node scripts/checkErrors.js'
+        run: 'node dist/scripts/checkErrors.js'
 
       - name: 'Rebuild README.md'
-        run: 'node scripts/buildReadme.js'
+        run: 'node dist/scripts/buildReadme.js'
